@@ -67,24 +67,24 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-white mb-4">Contact</h4>
             <ul className="space-y-3">
-              <li className="flex items-start gap-2 text-gray-400 text-sm">
+                  <li className="flex items-start gap-2 text-gray-400 text-sm">
                 <MapPin
                   size={15}
                   className="text-primary-500 mt-0.5 shrink-0"
                 />
                 <span>
-                  123 Dance Street,
+                  First Floor, Pandian Complex, 6th Cross Rd, Prakash Nagar,
                   <br />
-                  Chennai, Tamil Nadu 600001
+                  Hosur, Tamil Nadu 635109
                 </span>
               </li>
               <li className="flex items-center gap-2 text-gray-400 text-sm">
                 <Phone size={15} className="text-primary-500 shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 99943 59501</span>
               </li>
               <li className="flex items-center gap-2 text-gray-400 text-sm">
                 <Mail size={15} className="text-primary-500 shrink-0" />
-                <span>info@rhythmdance.in</span>
+                <span>unitedrhythmofficial@gmail.com</span>
               </li>
             </ul>
           </div>

@@ -182,6 +182,10 @@ const Instructors = () => {
         <div className="card overflow-hidden p-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[680px] text-sm">
+              <thead>
+                <tr>
+                  {[
+                    "Name",
                     "Email",
                     "Phone",
                     "Specializations",
