@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Prevent text size adjustment on orientation change (iOS) */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-dark-900 text-white font-sans antialiased;
+    /* Improve scroll performance on iOS */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+
+  /* Prevent iOS zoom on input focus — keep 16px minimum */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  /* Scale down text labels / badges visually on small screens via relative sizing */
+  @media (max-width: 640px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Ensure native select dropdowns are readable in dark theme */
+  select {
+    @apply bg-dark-800 text-white;
+  }
+
+  option {
+    @apply bg-dark-800 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-500;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-md bg-white/5 border border-white/10;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-md bg-black/30 border border-white/10;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400
+           text-white font-semibold px-6 py-2.5 rounded-xl transition-all duration-300
+           shadow-lg shadow-primary-900/40 hover:shadow-primary-800/60 hover:scale-105
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
+           touch-manipulation min-h-[44px] inline-flex items-center justify-center;
+  }
+
+  .btn-outline {
+    @apply border border-primary-500/50 text-primary-400 hover:bg-primary-500/10
+           font-semibold px-6 py-2.5 rounded-xl transition-all duration-300
+           hover:border-primary-400 hover:scale-105 active:scale-95
+           touch-manipulation min-h-[44px] inline-flex items-center justify-center;
+  }
+
+  .btn-ghost {
+    @apply text-gray-400 hover:text-white hover:bg-white/10
+           font-medium px-4 py-2 rounded-lg transition-all duration-200
+           touch-manipulation min-h-[44px] inline-flex items-center justify-center;
+  }
+
+  .card {
+    @apply glass rounded-2xl p-6 shadow-xl;
+  }
+
+  .card-hover {
+    @apply card hover:border-primary-500/30 hover:shadow-primary-900/20 transition-all duration-300 hover:-translate-y-1;
+  }
+
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3
+           text-white placeholder-gray-500 focus:outline-none focus:border-primary-500
+           focus:ring-1 focus:ring-primary-500 transition-colors min-h-[44px];
+  }
+
+  /* Fix native select/option visibility in dark theme */
+  select.input-field {
+    @apply bg-dark-800 text-white;
+  }
+
+  select.input-field option {
+    @apply bg-dark-800 text-white;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-400 to-gold-400 bg-clip-text text-transparent;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-bold;
+  }
+
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .bg-radial-purple {
+    background: radial-gradient(ellipse at top, #7e22ce20 0%, transparent 70%);
+  }
+
+  .mask-gradient-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  /* Safe area insets for devices with notch/home bar */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  /* Responsive table wrapper — horizontal scroll with shadow hint */
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-scroll table {
+    min-width: 600px;
+  }
+
+  /* Touch-friendly minimum size */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
