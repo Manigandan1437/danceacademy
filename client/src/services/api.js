@@ -1,21 +1,28 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-// Attach access token to every request
+// Attach access token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
   return config;
 });
 
-// Auto-refresh on 401 — but NOT for auth endpoints (login/register failures are real errors)
+// Refresh expired token
 api.interceptors.response.use(
-  (res) => res,
+  (response) => response,
+
   async (error) => {
     const original = error.config;
     const isAuthEndpoint = original?.url?.startsWith("/auth/");
@@ -26,22 +33,28 @@ api.interceptors.response.use(
       !isAuthEndpoint
     ) {
       original._retry = true;
+
       try {
-        const { data } = await axios.post(
-          "/api/auth/refresh-token",
-          {},
-          { withCredentials: true },
+        const { data } = await api.post("/auth/refresh-token");
+
+        localStorage.setItem(
+          "accessToken",
+          data.data.accessToken
         );
-        localStorage.setItem("accessToken", data.data.accessToken);
-        original.headers.Authorization = `Bearer ${data.data.accessToken}`;
+
+        original.headers.Authorization =
+          `Bearer ${data.data.accessToken}`;
+
         return api(original);
-      } catch {
+
+      } catch (err) {
         localStorage.removeItem("accessToken");
         window.location.href = "/login";
       }
     }
+
     return Promise.reject(error);
-  },
+  }
 );
 
 export default api;
