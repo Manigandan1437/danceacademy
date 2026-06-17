@@ -65,5 +65,5 @@ app.listen(PORT, () => {
   console.log(
     `\n🎭 Dance Academy Server running in ${process.env.NODE_ENV} mode on port ${PORT}`,
   );
-  console.log(`🔗 API: http://localhost:${PORT}/api/health\n`);
+  console.log(`Server Started Successfully`);
 });
